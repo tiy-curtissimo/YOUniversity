@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,26 +33,28 @@ public class User implements UserDetails {
         @Column(nullable=false)
         private String password;
         
+        @Column(nullable=false)
+        private String firstName;
+        
+        @Column(nullable=false)
+        private String lastName;
+        
+        @Column(nullable=false, unique=true)
+        private Email email;
+        
         @Column(nullable=false, unique=true)
         private String username;
         
-       public User() {}
+        public User() {}
         
-        public User(String username, String password) {
-                this.username = username;
+        public User(String firstName, String lastName, String password, Email email) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.email = email;
                 this.password = password;
+                this.username = email.toString();
         }
                 
-        @Override
-        public String getPassword() {
-                return password;
-        }
-
-        @Override
-        public String getUsername() {
-                return username;
-        }
-
         @Override
         public boolean isAccountNonExpired() {
                 return true;
@@ -84,13 +87,25 @@ public class User implements UserDetails {
                 this.password = password;
         }
 
-        public void setUsername(String username) {
-                this.username = username;
+        @Override
+        public String getUsername() {
+                return username;
         }
-
+        
+        public void setUsername(Email email) {
+                this.username = email.toString();
+        }
+        
+        @Override
+        public String getPassword() {
+                return password;
+        }
+        
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             // TODO Auto-generated method stub
             return null;
-        }       
+        }
+
+               
 }
