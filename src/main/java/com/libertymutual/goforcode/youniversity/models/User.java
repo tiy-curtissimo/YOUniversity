@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,7 +39,7 @@ public class User implements UserDetails {
     private String lastName;
 
     @Column(nullable = false, unique = true)
-    private Email email;
+    private String email;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -48,12 +47,12 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String firstName, String lastName, String password, Email email) {
+    public User(String firstName, String lastName, String password, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.username = email.toString();
+        this.username = email;
     }
 
     @Override
@@ -93,8 +92,8 @@ public class User implements UserDetails {
         return username;
     }
 
-    public void setUsername(Email email) {
-        this.username = email.toString();
+    public void setUsername(String email) {
+        this.username = email;
     }
 
     @Override
