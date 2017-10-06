@@ -17,46 +17,44 @@ import com.libertymutual.goforcode.youniversity.repositories.UserRepository;
 @RequestMapping("/")
 public class HomeController {
 
-        private UserRepository userRepository;
-        private PasswordEncoder encoder;
+    private UserRepository userRepository;
+    private PasswordEncoder encoder;
 
-        public HomeController(UserRepository userRepository, PasswordEncoder encoder) {
-                this.userRepository = userRepository;
-                this.encoder = encoder;
-        }
+    public HomeController(UserRepository userRepository, PasswordEncoder encoder) {
+        this.userRepository = userRepository;
+        this.encoder = encoder;
+    }
 
-        @GetMapping("")
-        public String home() {
-                return "home/default";
-        }
-        
-        @GetMapping("login-page")
-        public String login() {
-                return "home/login-page";
-        }
+    @GetMapping("")
+    public String home() {
+        return "home/default";
+    }
 
-        @GetMapping("signup")
-        public String signup() {
-                return "home/signup";
-        }
+    @GetMapping("login-page")
+    public String login() {
+        return "home/login-page";
+    }
 
-        @PostMapping("signup")
-        public ModelAndView handleSignup(User user) {
-                // TODO THIS IS REALLY DUMB; NEEDS REFACTORING
-                String password = user.getPassword();
-                String encryptedPassword = encoder.encode(password);
-                user.setPassword(encryptedPassword);
-                
-                ModelAndView mv = new ModelAndView();
-                try {
-                        userRepository.save(user);
-                        mv.setViewName("redirect:/login-page");
-                } catch (DataIntegrityViolationException dive) {
-                        mv.setViewName("home/signup");
-                        mv.addObject("errorMessage", "Cannot signup with that username");
-                }
-                return mv;
+    @GetMapping("signup")
+    public String signup() {
+        return "home/signup";
+    }
+
+    @PostMapping("signup")
+    public ModelAndView handleSignup(User user) {
+        String password = user.getPassword();
+        String encryptedPassword = encoder.encode(password);
+        user.setPassword(encryptedPassword);
+
+        ModelAndView mv = new ModelAndView();
+        try {
+            userRepository.save(user);
+            mv.setViewName("redirect:/login-page");
+        } catch (DataIntegrityViolationException dive) {
+            mv.setViewName("home/signup");
+            mv.addObject("errorMessage", "Cannot signup with that username");
         }
+        return mv;
+    }
 
 }
-
