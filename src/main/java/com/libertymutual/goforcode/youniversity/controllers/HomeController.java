@@ -1,7 +1,5 @@
 package com.libertymutual.goforcode.youniversity.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

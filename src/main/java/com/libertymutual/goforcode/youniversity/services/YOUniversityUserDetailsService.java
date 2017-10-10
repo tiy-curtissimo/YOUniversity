@@ -1,6 +1,5 @@
 package com.libertymutual.goforcode.youniversity.services;
 
-import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
