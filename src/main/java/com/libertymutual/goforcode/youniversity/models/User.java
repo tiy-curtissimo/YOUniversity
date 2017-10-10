@@ -1,13 +1,14 @@
 package com.libertymutual.goforcode.youniversity.models;
 
 import java.util.Collection;
-import java.util.prefs.Preferences;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,7 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
- @Table(name="youniversity_user")
+ @Table(name="uni_user")
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +42,9 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user")
 	private Preferences preferences;
+    
+    @OneToMany(mappedBy = "user")
+    private List<SchoolList> schoolList;
     
     public User() {
     }
