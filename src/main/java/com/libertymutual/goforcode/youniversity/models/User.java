@@ -40,11 +40,11 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
     private Preferences preferences;
 
     @OneToMany(mappedBy = "user")
-    private List<SchoolList> schoolList;
+    private List<SchoolListTests> schoolList;
 
     public User() {
     }
