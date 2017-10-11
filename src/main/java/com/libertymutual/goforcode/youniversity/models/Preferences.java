@@ -25,8 +25,8 @@ public class Preferences {
     @Column(nullable = false)
     private String major;
 
-    @OneToOne
-    private User user;
+    @OneToOne(mappedBy = "preferences")
+    private UserTests user;
 
     public Preferences() {
     }

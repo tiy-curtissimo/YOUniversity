@@ -1,6 +1,7 @@
 package com.libertymutual.goforcode.youniversity.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,8 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/css/**", "/js/**", "/signup", "/login-page", "/api/**")
-                .permitAll()
+                .antMatchers("/api/**", "/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/**", "/", "/css/**", "/js/**", "/signup", "/login-page").permitAll()
             .anyRequest()
                 .authenticated()
         .and()

@@ -21,7 +21,7 @@ public class UserController {
     private PasswordEncoder encoder;
 
     public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        this.userRepository = userRepository;	
     }
 
     @GetMapping("")
