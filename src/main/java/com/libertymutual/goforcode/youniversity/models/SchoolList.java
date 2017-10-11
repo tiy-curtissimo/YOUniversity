@@ -27,7 +27,7 @@ public class SchoolList {
     private User user;
     
     @ManyToMany(mappedBy = "schoolList", cascade = CascadeType.ALL)
-    private List<SchoolList> schools;
-    
+    private List<School> schools;
+
 	
 }
