@@ -44,7 +44,7 @@ public class User implements UserDetails {
     private Preferences preferences;
 
     @OneToMany(mappedBy = "user")
-    private List<SchoolListTests> schoolList;
+    private List<SchoolList> schoolList;
 
     public User() {
     }

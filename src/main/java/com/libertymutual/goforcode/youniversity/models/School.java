@@ -22,7 +22,7 @@ public class School {
 	private Long schoolApiId;
 	
 	@ManyToMany
-	private List<SchoolListTests> schoolList;
+	private List<SchoolList> schoolList;
 	
 
 
