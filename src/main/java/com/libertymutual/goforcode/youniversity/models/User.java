@@ -34,8 +34,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+//    @Column(nullable = false, unique = true)
+//    private String email;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -46,16 +46,15 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<SchoolList> schoolList;
 
-    public User() {
-    }
+    public User() {}
 
-    public User(String firstName, String lastName, String email, String password, Preferences preferences) {
+    public User(String firstName, String lastName, String username, String password, Preferences preferences) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.username = username;
+        //this.email = email;
         this.password = password;
-        this.preferences = preferences;
-        this.username = email;
+        this.preferences = preferences;        
     }
 
     @Override
@@ -104,11 +103,13 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
+        System.out.println(username);
         return username;
     }
 
     @Override
     public String getPassword() {
+        System.out.println(password);
         return password;
     }
 
