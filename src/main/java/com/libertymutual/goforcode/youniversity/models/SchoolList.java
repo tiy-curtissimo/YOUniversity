@@ -24,10 +24,10 @@ public class SchoolList {
     private String name;
 	
     @ManyToOne
-    private UserTests user;
+    private User user;
     
     @ManyToMany(mappedBy = "schoolList", cascade = CascadeType.ALL)
-    private List<SchoolTests> schools;
+    private List<SchoolList> schools;
     
 	
 }
