@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,8 +21,9 @@ public class UserController {
     private UserRepository userRepository;
     private PasswordEncoder encoder;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;	
+        this.encoder = encoder;
     }
 
     @GetMapping("")
@@ -39,19 +41,13 @@ public class UserController {
     }
 
     @PostMapping("create")
-    public ModelAndView createUser(User user) {
+    public User createUser(@RequestBody User user) {
         String password = user.getPassword();
+    	System.out.println("PW is: " + encoder.encode(password));
         String encryptedPassword = encoder.encode(password);
         user.setPassword(encryptedPassword);
 
-        ModelAndView mv = new ModelAndView();
-        try {
-            userRepository.save(user);
-            mv.addObject("sucessMessage", "Success");
-        } catch (DataIntegrityViolationException dive) {
-            mv.addObject("errorMessage", "Cannot create user with that username");
-        }
-        return mv;
+        return userRepository.save(user);
     }
 
 }

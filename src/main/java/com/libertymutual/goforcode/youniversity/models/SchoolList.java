@@ -29,5 +29,4 @@ public class SchoolList {
     @ManyToMany(mappedBy = "schoolList", cascade = CascadeType.ALL)
     private List<School> schools;
 
-	
 }

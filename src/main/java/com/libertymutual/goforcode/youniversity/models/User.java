@@ -3,6 +3,7 @@ package com.libertymutual.goforcode.youniversity.models;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Preferences preferences;
 
     @OneToMany(mappedBy = "user")
@@ -55,6 +56,7 @@ public class User implements UserDetails {
         //this.email = email;
         this.password = password;
         this.preferences = preferences;        
+
     }
 
     @Override
@@ -118,5 +120,29 @@ public class User implements UserDetails {
         // TODO Auto-generated method stub
         return null;
     }
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public List<SchoolList> getSchoolList() {
+		return schoolList;
+	}
+
+	public void setSchoolList(List<SchoolList> schoolList) {
+		this.schoolList = schoolList;
+	}
 
 }
