@@ -34,8 +34,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false, unique = true)
-    private String email;
+//    @Column(nullable = false, unique = true)
+//    private String email;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -49,13 +49,13 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password, Preferences preferences) {
+    public User(String firstName, String lastName, String username, String password, Preferences preferences) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+//        this.email = username;
         this.password = password;
         this.preferences = preferences;
-        this.username = email;
+        this.username = username;
     }
 
     @Override
@@ -90,9 +90,9 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setUsername(String email) {
-        this.username = email;
-    }
+//    public void setUsername(String email) {
+//        this.username = email;
+//    }
 
     public Preferences getPreferences() {
         return preferences;
