@@ -1,6 +1,7 @@
 package com.libertymutual.goforcode.youniversity.controllers;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.libertymutual.goforcode.youniversity.models.User;
 import com.libertymutual.goforcode.youniversity.repositories.UserRepository;
 
-@RequestMapping("/user")
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     private UserRepository userRepository;
@@ -24,7 +25,8 @@ public class UserController {
     }
 
     @GetMapping("")
-    public User getUser(User user) {
+    public User getUser(Authentication auth) {
+        User user = (User) auth.getPrincipal();
         String username = user.getUsername();
         return userRepository.findByUsername(username);
     }

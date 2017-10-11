@@ -22,23 +22,6 @@ public class HomeController {
     public HomeController(UserRepository userRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
-    }
-
-    @GetMapping("")
-    public String home() {
-        return "home/default";
-    }
-
-    @GetMapping("login-page")
-    public String login() {
-        return "home/login-page";
-    }
-
-    @GetMapping("signup")
-    public String signup() {
-        return "home/signup";
-    }
-
-    
+    }    
 
 }
