@@ -40,20 +40,14 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @PostMapping("create")	
-    public ModelAndView createUser(@RequestBody User user) {
+    @PostMapping("create")
+    public User createUser(@RequestBody User user) {
         String password = user.getPassword();
+    	System.out.println("PW is: " + encoder.encode(password));
         String encryptedPassword = encoder.encode(password);
         user.setPassword(encryptedPassword);
-        ModelAndView mv = new ModelAndView();
-        try {
-        	userRepository.save(user);
-            
-            mv.addObject("sucessMessage", "Success");
-        } catch (DataIntegrityViolationException dive) {
-            mv.addObject("errorMessage", "Cannot create user with that username");
-        }
-        return mv;
+
+        return userRepository.save(user);
     }
 
 }
