@@ -24,11 +24,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/user/**", "/api/**", "/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/**", "/", "/css/**", "/js/**", "/signup", "/login-page").permitAll()
+                .antMatchers("/user/**", "/api/**", "/swagger-ui.html", "/webjars/**", "/swagger-resources/**", "/v2/**", "/", "/css/**", "/js/**").permitAll()
             .anyRequest()
-                .authenticated()
-//        .and()
-//            .formLogin().loginPage("/login-page")
+
+                .authenticated()        
+
         .and()
             .csrf().disable();
 

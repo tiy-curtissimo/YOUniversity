@@ -23,7 +23,8 @@ public class School {
 	
 	@ManyToMany
 	private List<SchoolList> schoolList;
-	
+
+    
 
 
 }
