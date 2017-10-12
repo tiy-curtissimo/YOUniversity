@@ -35,16 +35,13 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
 
-//    @Column(nullable = false, unique = true)
-//    private String email;
-
     @Column(nullable = false, unique = true)
     private String username;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Preferences preferences;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<SchoolList> schoolList;
 
     public User() {}
@@ -105,13 +102,11 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        System.out.println(username);
         return username;
     }
 
     @Override
     public String getPassword() {
-        System.out.println(password);
         return password;
     }
 
