@@ -1,6 +1,5 @@
-package com.libertymutual.goforcode.youniversity.controllers;
+package com.libertymutual.goforcode.youniversity.apiControllers;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.libertymutual.goforcode.youniversity.models.User;
 import com.libertymutual.goforcode.youniversity.repositories.UserRepository;

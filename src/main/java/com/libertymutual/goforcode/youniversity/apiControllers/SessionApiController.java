@@ -30,7 +30,7 @@ public class SessionApiController {
 		this.userDetails = userDetails;
 		this.authenticator = authenticator;
 	}
-	
+	 
 	@GetMapping("/mine")
 	public Long whatever(Authentication auth) {
 	    if (auth.getPrincipal() != null) {
