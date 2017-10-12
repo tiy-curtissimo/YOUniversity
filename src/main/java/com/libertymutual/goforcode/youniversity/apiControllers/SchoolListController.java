@@ -36,27 +36,26 @@ public class SchoolListController {
         user = userRepo.findOne(user.getId());
         return schoolListRepo.findAllByUser(user);
     }
-    
+
     @DeleteMapping("{id}")
     public SchoolList deleteList(@PathVariable long id) {
         SchoolList schoolList = schoolListRepo.findOne(id);
         schoolListRepo.delete(id);
         return schoolList;
     }
-    
+
     @PostMapping("create")
     public SchoolList createList(@RequestBody SchoolList schoolList, Authentication auth) {
         User user = (User) auth.getPrincipal();
         user = userRepo.findOne(user.getId());
         schoolList.setUser(user);
-        return schoolListRepo.save(schoolList);        
+        return schoolListRepo.save(schoolList);
     }
-    
+
     @PutMapping("{id}")
     public SchoolList updateList(@RequestBody SchoolList schoolList, @PathVariable long id) {
         schoolList.setId(id);
         return schoolListRepo.save(schoolList);
     }
-    
-    
+
 }

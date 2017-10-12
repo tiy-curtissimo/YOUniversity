@@ -44,15 +44,16 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<SchoolList> schoolList;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String firstName, String lastName, String username, String password, Preferences preferences) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-        //this.email = email;
+        // this.email = email;
         this.password = password;
-        this.preferences = preferences;        
+        this.preferences = preferences;
 
     }
 
@@ -116,28 +117,28 @@ public class User implements UserDetails {
         return null;
     }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public List<SchoolList> getSchoolList() {
-		return schoolList;
-	}
+    public List<SchoolList> getSchoolList() {
+        return schoolList;
+    }
 
-	public void setSchoolList(List<SchoolList> schoolList) {
-		this.schoolList = schoolList;
-	}
+    public void setSchoolList(List<SchoolList> schoolList) {
+        this.schoolList = schoolList;
+    }
 
 }

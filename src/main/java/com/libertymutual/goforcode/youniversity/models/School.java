@@ -11,20 +11,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="school")
+@Table(name = "school")
 public class School {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column
-	private Long schoolApiId;
-	
-	@ManyToMany
-	private List<SchoolList> schoolList;
 
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
+    @Column
+    private Long schoolApiId;
+
+    @ManyToMany
+    private List<SchoolList> schoolList;
 
 }
