@@ -1,6 +1,5 @@
 package com.libertymutual.goforcode.youniversity.controllers;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.libertymutual.goforcode.youniversity.models.User;
 import com.libertymutual.goforcode.youniversity.repositories.UserRepository;
@@ -22,7 +20,7 @@ public class UserController {
     private PasswordEncoder encoder;
 
     public UserController(UserRepository userRepository, PasswordEncoder encoder) {
-        this.userRepository = userRepository;	
+        this.userRepository = userRepository;
         this.encoder = encoder;
     }
 
@@ -43,7 +41,7 @@ public class UserController {
     @PostMapping("create")
     public User createUser(@RequestBody User user) {
         String password = user.getPassword();
-    	System.out.println("PW is: " + encoder.encode(password));
+        System.out.println("PW is: " + encoder.encode(password));
         String encryptedPassword = encoder.encode(password);
         user.setPassword(encryptedPassword);
 

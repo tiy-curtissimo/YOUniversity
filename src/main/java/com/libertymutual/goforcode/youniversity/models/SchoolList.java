@@ -15,27 +15,28 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="schoollist")
+@Table(name = "schoollist")
 public class SchoolList {
 
-    public SchoolList() {}
-    
+    public SchoolList() {
+    }
+
     public SchoolList(String name, User user) {
         this.name = name;
-        this.user = user;        
+        this.user = user;
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Column
     private String name;
-	
+
     @ManyToOne
     @JsonIgnore
     private User user;
-    
+
     @ManyToMany(mappedBy = "schoolList", cascade = CascadeType.ALL)
     private List<School> schools;
 
@@ -70,7 +71,5 @@ public class SchoolList {
     public void setSchools(List<School> schools) {
         this.schools = schools;
     }
-
-   
 
 }

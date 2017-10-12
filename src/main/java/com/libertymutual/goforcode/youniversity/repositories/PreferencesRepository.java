@@ -8,5 +8,4 @@ import com.libertymutual.goforcode.youniversity.models.Preferences;
 @Repository
 public interface PreferencesRepository extends JpaRepository<Preferences, Long> {
 
-    
 }
