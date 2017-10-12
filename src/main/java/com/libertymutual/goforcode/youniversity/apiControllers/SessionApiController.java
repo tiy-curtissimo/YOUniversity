@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.libertymutual.goforcode.youniversity.models.User;
+
 @RestController
 @RequestMapping("/api/session")
 public class SessionApiController {
@@ -30,8 +32,11 @@ public class SessionApiController {
 	}
 	
 	@GetMapping("/mine")
-	public String whatever() {
-	    return "Hello, dude.";
+	public Long whatever(Authentication auth) {
+	    if (auth.getPrincipal() != null) {
+	        return ((User)auth.getPrincipal()).getId();
+	    }
+	    return null;
 	}
 
 	@PutMapping("/mine")
