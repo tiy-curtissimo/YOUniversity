@@ -33,7 +33,8 @@ public class SessionApiController {
 
     @GetMapping("/mine")
     public Long whatever(Authentication auth) {
-        if (auth.getPrincipal() != null) {
+    	
+        if (auth != null) {
             return ((User) auth.getPrincipal()).getId();
         }
         return null;
@@ -49,7 +50,9 @@ public class SessionApiController {
             SecurityContextHolder.getContext().setAuthentication(token);
         }
         return token.isAuthenticated();
+       
     }
+      
 
     @DeleteMapping("/mine")
     public Boolean logout(Authentication auth, HttpServletRequest request, HttpServletResponse response) {
