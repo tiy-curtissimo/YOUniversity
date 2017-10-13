@@ -36,7 +36,7 @@ public class SessionApiController {
     @ApiOperation(value = "Returns logged-in user's Id")
     @GetMapping("/mine")
     public Long getLoggedInUserIdBecauseThatSoundsFunEvenThoughItMayNotActuallyBeFunInTheTrueSenseOfTheWord(Authentication auth) {
-        if (auth.getPrincipal() != null) {
+        if (auth != null) {
             return ((User) auth.getPrincipal()).getId();
         }
         return null;
@@ -53,6 +53,7 @@ public class SessionApiController {
             SecurityContextHolder.getContext().setAuthentication(token);
         }
         return token.isAuthenticated();
+
     }
 
     @ApiOperation(value = "Logs-out current user")
