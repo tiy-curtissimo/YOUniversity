@@ -34,7 +34,7 @@ public class School {
     @Column
     private Long schoolApiId;
 
-    @ManyToMany(mappedBy = "schools", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "schools", cascade= {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     private List<SchoolList> schoolList;
 
     public Long getId() {

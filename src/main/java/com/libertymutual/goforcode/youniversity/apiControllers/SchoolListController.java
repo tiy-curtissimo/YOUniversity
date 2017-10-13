@@ -72,12 +72,22 @@ public class SchoolListController {
         return schoolList;
     }
 
-    @DeleteMapping("{listId}/delete/{schoolID}")
-    public School deleteSchoolFromList(@PathVariable long schoolId) {
+    @DeleteMapping("{listId}/delete/{schoolId}")
+    public School deleteSchoolFromList(@PathVariable long schoolId, @PathVariable long listId) {
         try {
-            School school = schoolRepo.findOne(schoolId);
+        	School returnedSchool = null;
+        	SchoolList schoolList = schoolListRepo.findOne(listId);
+            for (School school : schoolList.getSchools()) {
+            	if (school.getId() == schoolId) {
+            		returnedSchool = school;
+            		schoolList.getSchools().remove(school);
+            		break;
+            	}
+            }
+            
+            schoolListRepo.save(schoolList);
             schoolRepo.delete(schoolId);
-            return school;
+            return returnedSchool;
         } catch (EmptyResultDataAccessException erdae) {
             return null;
         }
