@@ -48,7 +48,7 @@ public class SchoolList {
     @JsonIgnore
     private User user;
     
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade= {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     private List<School> schools;
     
     public void addSchool(School school) {
