@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.libertymutual.goforcode.youniversity.models.User;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/session")
 public class SessionApiController {
@@ -31,15 +33,16 @@ public class SessionApiController {
         this.authenticator = authenticator;
     }
 
+    @ApiOperation(value = "Returns logged-in user's Id")
     @GetMapping("/mine")
-    public Long whatever(Authentication auth) {
-    	
+    public Long getLoggedInUserIdBecauseThatSoundsFunEvenThoughItMayNotActuallyBeFunInTheTrueSenseOfTheWord(Authentication auth) {
         if (auth != null) {
             return ((User) auth.getPrincipal()).getId();
         }
         return null;
     }
 
+    @ApiOperation(value = "Logs-in a user")
     @PutMapping("/mine")
     public Boolean login(@RequestBody Credentials credentials) {
         UserDetails details = userDetails.loadUserByUsername(credentials.getUsername());
@@ -50,10 +53,10 @@ public class SessionApiController {
             SecurityContextHolder.getContext().setAuthentication(token);
         }
         return token.isAuthenticated();
-       
-    }
-      
 
+    }
+
+    @ApiOperation(value = "Logs-out current user")
     @DeleteMapping("/mine")
     public Boolean logout(Authentication auth, HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response, auth);

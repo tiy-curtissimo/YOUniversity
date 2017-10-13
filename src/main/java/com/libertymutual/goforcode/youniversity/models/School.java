@@ -14,8 +14,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 @Entity
 @Table(name = "school")
@@ -35,7 +34,7 @@ public class School {
     @Column
     private Long schoolApiId;
 
-    @ManyToMany(mappedBy = "schools", cascade= {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(mappedBy = "schools", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH })
     private List<SchoolList> schoolList;
 
     public Long getId() {
@@ -63,4 +62,3 @@ public class School {
     }
 
 }
-
