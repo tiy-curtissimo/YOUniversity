@@ -41,46 +41,45 @@ public class SchoolListController {
         user = userRepo.findOne(user.getId());
         return schoolListRepo.findAllByUser(user);
     }
-    
+
     @DeleteMapping("{id}")
     public SchoolList deleteList(@PathVariable long id) {
         SchoolList schoolList = schoolListRepo.findOne(id);
         schoolListRepo.delete(id);
         return schoolList;
     }
-    
+
     @PostMapping("create")
     public SchoolList createList(@RequestBody SchoolList schoolList, Authentication auth) {
         User user = (User) auth.getPrincipal();
         user = userRepo.findOne(user.getId());
         schoolList.setUser(user);
-        return schoolListRepo.save(schoolList);        
+        return schoolListRepo.save(schoolList);
     }
-    
+
     @PutMapping("{id}")
     public SchoolList updateList(@RequestBody SchoolList schoolList, @PathVariable long id) {
         schoolList.setId(id);
         return schoolListRepo.save(schoolList);
     }
-    
+
     @PostMapping("{listId}/add")
     public SchoolList addSchoolToList(@PathVariable long listId, @RequestBody School school) {
-    	SchoolList schoolList = schoolListRepo.findOne(listId);
-    	schoolRepo.save(school);
-    	schoolList.addSchool(school);
-    	schoolListRepo.save(schoolList);
-    	return schoolList;
+        SchoolList schoolList = schoolListRepo.findOne(listId);
+        schoolRepo.save(school);
+        schoolList.addSchool(school);
+        schoolListRepo.save(schoolList);
+        return schoolList;
     }
-    
+
     @DeleteMapping("{listId}/delete/{schoolID}")
     public School deleteSchoolFromList(@PathVariable long schoolId) {
-    	try {
-			School school = schoolRepo.findOne(schoolId);
-			schoolRepo.delete(schoolId);
-			return school;
-		} catch (EmptyResultDataAccessException erdae) {
-			return null;
-		} 
+        try {
+            School school = schoolRepo.findOne(schoolId);
+            schoolRepo.delete(schoolId);
+            return school;
+        } catch (EmptyResultDataAccessException erdae) {
+            return null;
+        }
     }
-    
 }

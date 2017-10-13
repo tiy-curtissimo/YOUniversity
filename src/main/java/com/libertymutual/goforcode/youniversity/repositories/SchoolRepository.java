@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.libertymutual.goforcode.youniversity.models.School;
 
-	@Repository
-	public interface SchoolRepository extends JpaRepository<School, Long> {
+@Repository
+public interface SchoolRepository extends JpaRepository<School, Long> {
 
 }

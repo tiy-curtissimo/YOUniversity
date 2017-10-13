@@ -20,7 +20,7 @@ public class UserController {
     private PasswordEncoder encoder;
 
     public UserController(UserRepository userRepository, PasswordEncoder encoder) {
-        this.userRepository = userRepository;	
+        this.userRepository = userRepository;
         this.encoder = encoder;
     }
 
@@ -41,7 +41,7 @@ public class UserController {
     @PostMapping("create")
     public User createUser(@RequestBody User user) {
         String password = user.getPassword();
-    	System.out.println("PW is: " + encoder.encode(password));
+        System.out.println("PW is: " + encoder.encode(password));
         String encryptedPassword = encoder.encode(password);
         user.setPassword(encryptedPassword);
 

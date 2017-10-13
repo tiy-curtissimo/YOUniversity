@@ -16,6 +16,6 @@ public class HomeController {
     public HomeController(UserRepository userRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
-    }    
+    }
 
 }

@@ -12,47 +12,48 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="school")
+@Table(name = "school")
 public class School {
-	
-	public School() {}
-	
-	public School(Long schoolApiID) {
-		this.schoolApiId = schoolApiID;
-	}
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column
-	private Long schoolApiId;
 
-	@ManyToMany(mappedBy = "schools", cascade = CascadeType.ALL)
-	private List<SchoolList> schoolList;
+    public School() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public School(Long schoolApiID) {
+        this.schoolApiId = schoolApiID;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public Long getSchoolApiId() {
-		return schoolApiId;
-	}
+    @Column
+    private Long schoolApiId;
 
-	public void setSchoolApiId(Long schoolApiId) {
-		this.schoolApiId = schoolApiId;
-	}
-	
-//	public List<SchoolList> getSchoolList() {
-//		return schoolList;
-//	}
+    @ManyToMany(mappedBy = "schools", cascade = CascadeType.ALL)
+    private List<SchoolList> schoolList;
 
-	public void setSchoolList(List<SchoolList> schoolList) {
-		this.schoolList = schoolList;
-	}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getSchoolApiId() {
+        return schoolApiId;
+    }
+
+    public void setSchoolApiId(Long schoolApiId) {
+        this.schoolApiId = schoolApiId;
+    }
+
+    // public List<SchoolList> getSchoolList() {
+    // return schoolList;
+    // }
+
+    public void setSchoolList(List<SchoolList> schoolList) {
+        this.schoolList = schoolList;
+    }
 
 }
