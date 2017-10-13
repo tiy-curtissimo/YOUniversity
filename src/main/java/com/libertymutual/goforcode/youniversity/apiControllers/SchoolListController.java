@@ -37,7 +37,7 @@ public class SchoolListController {
         this.schoolRepo = schoolRepo;
 
     }
-    
+
     @ApiOperation("Returns a user's list(s)")
     @GetMapping("")
     public List<SchoolList> getList(Authentication auth) {
