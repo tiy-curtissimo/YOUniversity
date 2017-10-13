@@ -20,6 +20,9 @@ import com.libertymutual.goforcode.youniversity.repositories.SchoolListRepositor
 import com.libertymutual.goforcode.youniversity.repositories.SchoolRepository;
 import com.libertymutual.goforcode.youniversity.repositories.UserRepository;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 @RestController
 @RequestMapping("/list")
 public class SchoolListController {
@@ -34,7 +37,8 @@ public class SchoolListController {
         this.schoolRepo = schoolRepo;
 
     }
-
+    
+    @ApiOperation("Returns a user's list(s)")
     @GetMapping("")
     public List<SchoolList> getList(Authentication auth) {
         User user = (User) auth.getPrincipal();
@@ -42,6 +46,8 @@ public class SchoolListController {
         return schoolListRepo.findAllByUser(user);
     }
 
+    @ApiOperation("Deletes a list")
+    @ApiParam(value = "schoolListId", required = true)
     @DeleteMapping("{id}")
     public SchoolList deleteList(@PathVariable long id) {
         SchoolList schoolList = schoolListRepo.findOne(id);
@@ -49,6 +55,8 @@ public class SchoolListController {
         return schoolList;
     }
 
+    @ApiOperation(value = "Creates a list")
+    @ApiParam(value = "SchoolList object", required = true)
     @PostMapping("create")
     public SchoolList createList(@RequestBody SchoolList schoolList, Authentication auth) {
         User user = (User) auth.getPrincipal();
@@ -57,12 +65,16 @@ public class SchoolListController {
         return schoolListRepo.save(schoolList);
     }
 
+    @ApiOperation(value = "Changes the name of the list")
+    @ApiParam(value = "SchoolList object, schoolListId", required = true)
     @PutMapping("{id}")
     public SchoolList updateList(@RequestBody SchoolList schoolList, @PathVariable long id) {
         schoolList.setId(id);
         return schoolListRepo.save(schoolList);
     }
 
+    @ApiOperation(value = "Adds a school to a list")
+    @ApiParam(value = "schoolListId, School object", required = true)
     @PostMapping("{listId}/add")
     public SchoolList addSchoolToList(@PathVariable long listId, @RequestBody School school) {
         SchoolList schoolList = schoolListRepo.findOne(listId);
@@ -72,7 +84,9 @@ public class SchoolListController {
         return schoolList;
     }
 
-    @DeleteMapping("{listId}/delete/{schoolID}")
+    @ApiOperation(value = "Deletes a school from a list")
+    @ApiParam(value = "schoolId", required = true)
+    @DeleteMapping("{listId}/delete/{schoolId}")
     public School deleteSchoolFromList(@PathVariable long schoolId) {
         try {
             School school = schoolRepo.findOne(schoolId);
