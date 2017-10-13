@@ -13,43 +13,41 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
-@Table(name = "schoollist")
+@Table(name="schoollist")
 public class SchoolList {
 
-    public SchoolList() {
-    }
-
+    public SchoolList() {}
+    
     public SchoolList(String name, User user) {
         this.name = name;
-        this.user = user;
+        this.user = user;        
     }
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
     @Column
     private String name;
-
+	
     @ManyToOne
+    @JsonIgnore
     private User user;
-
-    @ApiModelProperty(hidden = true)
-    @ManyToMany(cascade = CascadeType.ALL)
+    
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<School> schools;
-
+    
     public void addSchool(School school) {
-        if (schools == null) {
-            schools = new ArrayList<School>();
-        }
-        schools.add(school);
+    	if (schools == null) {
+    		schools = new ArrayList<School>();
+    	}
+    		schools.add(school);
     }
 
     public Long getId() {
@@ -83,5 +81,7 @@ public class SchoolList {
     public void setSchools(List<School> schools) {
         this.schools = schools;
     }
+
+   
 
 }
