@@ -24,7 +24,7 @@ public class School {
 	}
 
 	public School(Long schoolApiID, int rank, String schoolName, String schoolLocation, String state, double admission,
-			String highestDegree, String schoolUrl, Long inState, Long outState, Long avgNet, String comment) {
+			String highestDegree, String schoolUrl, int inState, int outState, int avgNet, String comment) {
 		this.schoolApiId = schoolApiID;
 		this.rank = rank;
 		this.schoolName = schoolName;
@@ -68,13 +68,13 @@ public class School {
 	private String schoolUrl;
 
 	@Column
-	private Long inState;
+	private int inState;
 
 	@Column
-	private Long outState;
+	private int outState;
 
 	@Column
-	private Long avgNet;
+	private int avgNet;
 
 	@Column
 	private String comment;
@@ -155,27 +155,27 @@ public class School {
 		this.schoolUrl = schoolUrl;
 	}
 
-	public Long getInState() {
+	public int getInState() {
 		return inState;
 	}
 
-	public void setInState(Long inState) {
+	public void setInState(int inState) {
 		this.inState = inState;
 	}
 
-	public Long getOutState() {
+	public int getOutState() {
 		return outState;
 	}
 
-	public void setOutState(Long outState) {
+	public void setOutState(int outState) {
 		this.outState = outState;
 	}
 
-	public Long getAvgNet() {
+	public int getAvgNet() {
 		return avgNet;
 	}
 
-	public void setAvgNet(Long avgNet) {
+	public void setAvgNet(int avgNet) {
 		this.avgNet = avgNet;
 	}
 
