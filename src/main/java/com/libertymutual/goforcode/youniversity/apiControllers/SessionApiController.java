@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +22,7 @@ import com.libertymutual.goforcode.youniversity.models.User;
 
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/session")
 public class SessionApiController {
@@ -44,7 +46,7 @@ public class SessionApiController {
 
     @ApiOperation(value = "Logs-in a user")
     @PutMapping("/mine")
-    public Boolean login(@RequestBody Credentials credentials) {
+    public UserDetails login(@RequestBody Credentials credentials) {
         UserDetails details = userDetails.loadUserByUsername(credentials.getUsername());
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(details, credentials.password, details.getAuthorities());
         authenticator.authenticate(token);
@@ -52,7 +54,7 @@ public class SessionApiController {
         if (token.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(token);
         }
-        return token.isAuthenticated();
+        return details;
 
     }
 
