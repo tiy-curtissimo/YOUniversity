@@ -46,7 +46,7 @@ public class SessionApiController {
 
     @ApiOperation(value = "Logs-in a user")
     @PutMapping("/mine")
-    public Boolean login(@RequestBody Credentials credentials) {
+    public UserDetails login(@RequestBody Credentials credentials) {
         UserDetails details = userDetails.loadUserByUsername(credentials.getUsername());
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(details, credentials.password, details.getAuthorities());
         authenticator.authenticate(token);
@@ -54,7 +54,7 @@ public class SessionApiController {
         if (token.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(token);
         }
-        return token.isAuthenticated();
+        return details;
 
     }
 
