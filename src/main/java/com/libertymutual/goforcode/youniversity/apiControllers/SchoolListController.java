@@ -24,7 +24,7 @@ import com.libertymutual.goforcode.youniversity.repositories.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/list")
 public class SchoolListController {
