@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.libertymutual.goforcode.youniversity.models.Preferences;
 import com.libertymutual.goforcode.youniversity.models.User;
 import com.libertymutual.goforcode.youniversity.repositories.UserRepository;
 
@@ -23,6 +24,7 @@ public class UserController {
 
     private UserRepository userRepository;
     private PasswordEncoder encoder;
+    
 
     public UserController(UserRepository userRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
@@ -34,15 +36,22 @@ public class UserController {
     public User getUser(Authentication auth) {
         User user = (User) auth.getPrincipal();
         String username = user.getUsername();
+        
         return userRepository.findByUsername(username);
     }
 
     @ApiOperation(value = "Updates a user")
     @ApiParam(value = "User object", required = true)
     @PutMapping("")
-    public User updateUser(User user) {
-        String username = user.getUsername();
+    public User updateUser(Authentication auth, User user) {
+    	User loguser = (User) auth.getPrincipal();
+        String username = loguser.getUsername();
         userRepository.findByUsername(username);
+        String firstName = loguser.getFirstName();
+        String lastName = loguser.getLastName();
+        user.setFirstName(firstName );
+        user.setLastName(lastName);
+        
         return userRepository.save(user);
     }
 
