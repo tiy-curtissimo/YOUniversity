@@ -51,7 +51,6 @@ public class UserController {
     @PostMapping("create")
     public User createUser(@RequestBody User user) {
         String password = user.getPassword();
-        System.out.println("PW is: " + encoder.encode(password));
         String encryptedPassword = encoder.encode(password);
         user.setPassword(encryptedPassword);
 
