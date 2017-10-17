@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
@@ -27,10 +26,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
 	    http.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/user/create").permitAll()
-		.antMatchers(HttpMethod.OPTIONS).permitAll()
 		.antMatchers(HttpMethod.PUT, "/api/session/mine").permitAll()
-		.antMatchers("/swagger-ui.html", "/webjars/**", "/swagger-resources/**",
-		"/v2/**", "/", "/css/**", "/js/**").permitAll()
+		.antMatchers(HttpMethod.GET, "/swagger-ui.html", "/webjars/**", "/swagger-resources/**","/v2/**", "/", "/css/**", "/js/**").permitAll()
+		.antMatchers(HttpMethod.OPTIONS).permitAll()
 		.anyRequest().authenticated()
 		.and().csrf().disable();
 //		.addFilterAfter(new CsrfIntoCookieFilter(), CsrfFilter.class)
