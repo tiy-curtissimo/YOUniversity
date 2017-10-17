@@ -43,10 +43,10 @@ public class UserController {
     @ApiParam(value = "User object", required = true)
     @PutMapping("")
     public User updateUser(Authentication auth, @RequestBody User user) {
-        User loggedInUser = (User) auth.getPrincipal();
-        user.setId(loggedInUser.getId());
-
-        return userRepository.save(user);
+    	User loggedInUser = (User) auth.getPrincipal();
+    	user.setId(loggedInUser.getId());
+    	    	
+    	return userRepository.save(user);
     }
 
     @ApiOperation(value = "Creates a user")
@@ -56,12 +56,12 @@ public class UserController {
         String password = user.getPassword();
         String encryptedPassword = encoder.encode(password);
         user.setPassword(encryptedPassword);
-        userRepository.save(user);
+        userRepository.save(user);        
         SchoolList schoolList = new SchoolList();
-        schoolList.setName("Favorites");
+        schoolList.setName("Favorites"); 
         user = userRepository.findOne(user.getId());
         schoolList.setUser(user);
-        schoolListRepo.save(schoolList);
+        schoolListRepo.save(schoolList);        
         user.setSchoolList(schoolList);
 
         return user;
