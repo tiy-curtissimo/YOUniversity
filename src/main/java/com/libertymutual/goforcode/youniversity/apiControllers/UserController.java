@@ -38,10 +38,11 @@ public class UserController {
     @ApiOperation(value = "Updates a user")
     @ApiParam(value = "User object", required = true)
     @PutMapping("")
-    public User updateUser(User user) {
-        String username = user.getUsername();
-        userRepository.findByUsername(username);
-        return userRepository.save(user);
+    public User updateUser(Authentication auth, @RequestBody User user) {
+    	User loggedInUser = (User) auth.getPrincipal();
+    	user.setId(loggedInUser.getId());
+    	    	
+    	return userRepository.save(user);
     }
 
     @ApiOperation(value = "Creates a user")
