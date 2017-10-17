@@ -16,9 +16,7 @@ public class Preferences {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
-    private String cost;
-
+    
     @Column(nullable = false)
     private String location;
 
@@ -32,7 +30,6 @@ public class Preferences {
     }
 
     public Preferences(String cost, String location, String major) {
-        this.cost = cost;
         this.location = location;
         this.major = major;
 
@@ -46,14 +43,7 @@ public class Preferences {
         this.id = id;
     }
 
-    public String getCost() {
-        return cost;
-    }
-
-    public void setCost(String cost) {
-        this.cost = cost;
-    }
-
+   
     public String getLocation() {
         return location;
     }
