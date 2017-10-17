@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.libertymutual.goforcode.youniversity.models.SchoolList;
 import com.libertymutual.goforcode.youniversity.models.User;
 import com.libertymutual.goforcode.youniversity.repositories.SchoolListRepository;
 import com.libertymutual.goforcode.youniversity.repositories.UserRepository;
-
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -24,6 +22,7 @@ public class UserController {
     private UserRepository userRepository;
     private PasswordEncoder encoder;
     private SchoolListRepository schoolListRepo;
+
 
     public UserController(UserRepository userRepository, PasswordEncoder encoder, SchoolListRepository schoolListRepo) {
         this.userRepository = userRepository;
@@ -36,17 +35,20 @@ public class UserController {
     public User getUser(Authentication auth) {
         User user = (User) auth.getPrincipal();
         String username = user.getUsername();
+        
         return userRepository.findByUsername(username);
     }
 
     @ApiOperation(value = "Updates a user")
     @ApiParam(value = "User object", required = true)
     @PutMapping("")
+
     public User updateUser(Authentication auth, @RequestBody User user) {
         User loggedInUser = (User) auth.getPrincipal();
         user.setId(loggedInUser.getId());
 
         return userRepository.save(user);
+
     }
 
     @ApiOperation(value = "Creates a user")
@@ -63,7 +65,7 @@ public class UserController {
         schoolList.setUser(user);
         schoolListRepo.save(schoolList);
         user.setSchoolList(schoolList);
-
+        userRepository.save(user);
         return user;
     }
 }
