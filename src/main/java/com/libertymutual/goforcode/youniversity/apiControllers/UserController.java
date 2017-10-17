@@ -43,16 +43,13 @@ public class UserController {
     @ApiOperation(value = "Updates a user")
     @ApiParam(value = "User object", required = true)
     @PutMapping("")
-    public User updateUser(Authentication auth, User user) {
-    	User loguser = (User) auth.getPrincipal();
-        String username = loguser.getUsername();
-        userRepository.findByUsername(username);
-        String firstName = loguser.getFirstName();
-        String lastName = loguser.getLastName();
-        user.setFirstName(firstName );
-        user.setLastName(lastName);
-        
-        return userRepository.save(user);
+
+    public User updateUser(Authentication auth, @RequestBody User user) {
+    	User loggedInUser = (User) auth.getPrincipal();
+    	user.setId(loggedInUser.getId());
+    	    	
+    	return userRepository.save(user);
+
     }
 
     @ApiOperation(value = "Creates a user")
