@@ -43,9 +43,9 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private Preferences preferences;
 
-	@ApiModelProperty(hidden=true)
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<SchoolList> schoolList;
+    @ApiModelProperty(hidden = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    private SchoolList schoolList;
 
     public User() {
     }
@@ -54,7 +54,6 @@ public class User implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-        // this.email = email;
         this.password = password;
         this.preferences = preferences;
 
@@ -92,9 +91,9 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-//    public void setUsername(String email) {
-//        this.username = email;
-//    }
+    // public void setUsername(String email) {
+    // this.username = email;
+    // }
 
     public Preferences getPreferences() {
         return preferences;
@@ -136,11 +135,11 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    public List<SchoolList> getSchoolList() {
+    public SchoolList getSchoolList() {
         return schoolList;
     }
 
-    public void setSchoolList(List<SchoolList> schoolList) {
+    public void setSchoolList(SchoolList schoolList) {
         this.schoolList = schoolList;
     }
 

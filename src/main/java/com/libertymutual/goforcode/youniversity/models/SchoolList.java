@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -39,7 +40,7 @@ public class SchoolList {
     @Column
     private String name;
 
-    @ManyToOne
+    @OneToOne(mappedBy = "schoolList")
     @JsonIgnore
     private User user;
 
