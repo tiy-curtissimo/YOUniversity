@@ -8,16 +8,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
-import com.libertymutual.goforcode.youniversity.models.Preferences;
-
 import com.libertymutual.goforcode.youniversity.models.SchoolList;
-
 import com.libertymutual.goforcode.youniversity.models.User;
 import com.libertymutual.goforcode.youniversity.repositories.SchoolListRepository;
 import com.libertymutual.goforcode.youniversity.repositories.UserRepository;
-
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -71,7 +65,7 @@ public class UserController {
         schoolList.setUser(user);
         schoolListRepo.save(schoolList);
         user.setSchoolList(schoolList);
-
+        userRepository.save(user);
         return user;
     }
 }
