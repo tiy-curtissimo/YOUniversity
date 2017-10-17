@@ -13,9 +13,6 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
-
-
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -27,38 +24,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/user/create").permitAll()
-				.antMatchers(HttpMethod.OPTIONS).permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/session/mine").permitAll()
-				.antMatchers("/swagger-ui.html", "/webjars/**", "/swagger-resources/**",
-				"/v2/**", "/", "/css/**", "/js/**").permitAll()
-				.anyRequest().authenticated()
-				.and().csrf().disable();
-//				.addFilterAfter(new CsrfIntoCookieFilter(), CsrfFilter.class)
-//				.csrf()
-//				.csrfTokenRepository(tokenRepository());
+        protected void configure(HttpSecurity http) throws Exception {
+	    http.authorizeRequests()
+		.antMatchers(HttpMethod.POST, "/user/create").permitAll()
+		.antMatchers(HttpMethod.OPTIONS).permitAll()
+		.antMatchers(HttpMethod.PUT, "/api/session/mine").permitAll()
+		.antMatchers("/swagger-ui.html", "/webjars/**", "/swagger-resources/**",
+		"/v2/**", "/", "/css/**", "/js/**").permitAll()
+		.anyRequest().authenticated()
+		.and().csrf().disable();
+//		.addFilterAfter(new CsrfIntoCookieFilter(), CsrfFilter.class)
+//		.csrf()
+//		.csrfTokenRepository(tokenRepository());
 	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
-	
+	    return new BCryptPasswordEncoder();
+	}	
 	
 	@Override
 	public UserDetailsService userDetailsService() {
-		return userDetailsService;
+	    return userDetailsService;
 	}
 	
 	public CsrfTokenRepository tokenRepository() {
-		HttpSessionCsrfTokenRepository tokenRepository = new HttpSessionCsrfTokenRepository();
+	    HttpSessionCsrfTokenRepository tokenRepository = new HttpSessionCsrfTokenRepository();
 	    tokenRepository.setHeaderName("X-XSRF-TOKEN");
-	    tokenRepository.setParameterName("_csrf");
-	    
+	    tokenRepository.setParameterName("_csrf");	    
 	    return tokenRepository;
 	}
-
 }
